@@ -34,6 +34,22 @@ export const products = [
     description: 'Hambúrguer do bom, topzera',
     imagePath: '1708147540239-burger-molho-especial.png',
     price: 28.49,
-    ingredients: [],
+    ingredients: [
+      {
+        name: 'Cheddar',
+        icon: '🧀',
+        _id: '6372e040f52e37ef85fe2c5f',
+      },
+      {
+        name: 'Cebola',
+        icon: '🧅',
+        _id: '6372e040f52e37ef85fe2c60',
+      },
+      {
+        name: 'Carne',
+        icon: '🐂',
+        _id: '6372e040f52e37ef85fe2c61',
+      },
+    ],
   },
 ];
