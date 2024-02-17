@@ -7,10 +7,10 @@ interface TextProps {
   opacity?: number;
 }
 
-export const Text = styled.Text<TextProps>`
-  font-family: ${({ weight }) =>
+export const Text = styled.Text`
+  font-family: ${({ weight }: TextProps) =>
     weight ? `GeneralSans-${weight}` : 'GeneralSans-400'};
-  color: ${({ color }) => color || '#333'};
-  font-size: ${({ size }) => (size ? `${size}px` : '16px')};
-  opacity: ${({ opacity }) => opacity || 1};
+  color: ${({ color }: TextProps) => color || '#333'};
+  font-size: ${({ size }: TextProps) => (size ? `${size}px` : '16px')};
+  opacity: ${({ opacity }: TextProps) => opacity || 1};
 `;

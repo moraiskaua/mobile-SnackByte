@@ -1,7 +1,9 @@
+import { TouchableOpacityProps } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
-  background-color: ${({ disabled }) => (disabled ? '#999' : '#d73035')};
+  background-color: ${({ disabled }: TouchableOpacityProps) =>
+    disabled ? '#999' : '#d73035'};
   border-radius: 48px;
   padding: 14px 24px;
   justify-content: center;
