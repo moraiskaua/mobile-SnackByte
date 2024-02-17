@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native';
-import { products } from '../mocks/products';
-import { Text } from '../components/Text';
+import { products } from '../../mocks/products';
+import { Text } from '../Text';
 import {
   AddToCartButton,
   Product,
@@ -8,8 +8,8 @@ import {
   ProductImage,
   Separator,
 } from './styles';
-import { formatCurrency } from '../utils/formatCurrency';
-import { PlusCircle } from '../components/Icons/PlusCircle';
+import { formatCurrency } from '../../utils/formatCurrency';
+import { PlusCircle } from '../Icons/PlusCircle';
 
 interface MenuProps {}
 

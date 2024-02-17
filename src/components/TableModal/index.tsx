@@ -20,6 +20,7 @@ const TableModal: React.FC<TableModalProps> = ({
 
   const handleSave = () => {
     onSave(table);
+    setTable('');
     onClose();
   };
 

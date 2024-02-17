@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Menu from '../Menu';
+import Menu from '../components/Menu';
 import Button from '../components/Button';
 import Categories from '../components/Categories';
 import Header from '../components/Header';
@@ -20,6 +20,10 @@ const Main = () => {
     setSelectedTable(table);
   };
 
+  const handleCancelOrder = () => {
+    setSelectedTable('');
+  };
+
   return (
     <>
       <TableModal
@@ -29,7 +33,10 @@ const Main = () => {
       />
 
       <Container>
-        <Header />
+        <Header
+          selectedTable={selectedTable}
+          onCancelOrder={handleCancelOrder}
+        />
 
         <CategoriesContainer>
           <Categories />
