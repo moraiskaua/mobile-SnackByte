@@ -5,12 +5,12 @@ import { Text } from '../Text';
 
 interface OrderConfirmModalProps {
   visible: boolean;
-  onClose: () => void;
+  onOk: () => void;
 }
 
 const OrderConfirmModal: React.FC<OrderConfirmModalProps> = ({
   visible,
-  onClose,
+  onOk,
 }) => {
   return (
     <Modal visible={visible} animationType="fade">
@@ -24,7 +24,7 @@ const OrderConfirmModal: React.FC<OrderConfirmModalProps> = ({
           o pedido já entrou na fila de produção!
         </Text>
 
-        <OkButton onPress={onClose}>
+        <OkButton onPress={onOk}>
           <Text color="#d73035" weight="600">
             OK
           </Text>

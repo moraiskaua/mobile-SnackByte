@@ -23,9 +23,15 @@ interface CartProps {
   cartItems: CartItem[];
   onAdd: (product: ProductType) => void;
   onRemove: (product: ProductType) => void;
+  onConfirmOrder: () => void;
 }
 
-const Cart: React.FC<CartProps> = ({ cartItems, onAdd, onRemove }) => {
+const Cart: React.FC<CartProps> = ({
+  cartItems,
+  onAdd,
+  onRemove,
+  onConfirmOrder,
+}) => {
   const [isOrderModalVisible, setIsOrderModalVisible] = useState(false);
 
   const total = cartItems.reduce((total, cartItem) => {
@@ -40,7 +46,10 @@ const Cart: React.FC<CartProps> = ({ cartItems, onAdd, onRemove }) => {
     <>
       <OrderConfirmModal
         visible={isOrderModalVisible}
-        onClose={() => setIsOrderModalVisible(false)}
+        onOk={() => {
+          onConfirmOrder();
+          setIsOrderModalVisible(false);
+        }}
       />
 
       {cartItems.length > 0 && (
