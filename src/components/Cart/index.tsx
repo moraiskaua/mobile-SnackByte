@@ -18,9 +18,11 @@ import Button from '../Button';
 import { ProductType } from '../../types/Product';
 import OrderConfirmModal from '../OrderConfirmModal';
 import { useState } from 'react';
+import { api } from '../../utils/api';
 
 interface CartProps {
   cartItems: CartItemType[];
+  selectedTable: string;
   onAdd: (product: ProductType) => void;
   onRemove: (product: ProductType) => void;
   onConfirmOrder: () => void;
@@ -28,6 +30,7 @@ interface CartProps {
 
 const Cart: React.FC<CartProps> = ({
   cartItems,
+  selectedTable,
   onAdd,
   onRemove,
   onConfirmOrder,
@@ -39,7 +42,16 @@ const Cart: React.FC<CartProps> = ({
     return total + cartItem.quantity * cartItem.product.price;
   }, 0);
 
-  const handleConfirmOrder = () => {
+  const handleConfirmOrder = async () => {
+    setIsLoading(true);
+    await api.post('/orders', {
+      table: selectedTable,
+      product: cartItems.map(cartItem => ({
+        product: cartItem.product,
+        quantity: cartItem.quantity,
+      })),
+    });
+    setIsLoading(false);
     setIsOrderModalVisible(true);
   };
 
