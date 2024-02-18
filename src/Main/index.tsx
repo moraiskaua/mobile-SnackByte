@@ -16,12 +16,16 @@ import Cart from '../components/Cart';
 import { CartItem } from '../types/CartItem';
 import { ProductType } from '../types/Product';
 import { ActivityIndicator } from 'react-native';
+import { products as mockProducts } from '../mocks/products';
+import { Empty } from '../components/Icons/Empty';
+import { Text } from '../components/Text';
 
 const Main = () => {
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState<ProductType[]>(mockProducts);
 
   const handleSaveTable = (table: string) => {
     setSelectedTable(table);
@@ -98,9 +102,19 @@ const Main = () => {
               <Categories />
             </CategoriesContainer>
 
-            <MenuContainer>
-              <Menu onAddToCart={handleAddToCart} />
-            </MenuContainer>
+            {products.length > 0 ? (
+              <MenuContainer>
+                <Menu onAddToCart={handleAddToCart} products={products} />
+              </MenuContainer>
+            ) : (
+              <CenteredContainer>
+                <Empty />
+
+                <Text color="#666" style={{ marginTop: 24 }}>
+                  Nenhum produto foi encontrado...
+                </Text>
+              </CenteredContainer>
+            )}
           </>
         ) : (
           <CenteredContainer>
