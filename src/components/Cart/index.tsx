@@ -33,6 +33,7 @@ const Cart: React.FC<CartProps> = ({
   onConfirmOrder,
 }) => {
   const [isOrderModalVisible, setIsOrderModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const total = cartItems.reduce((total, cartItem) => {
     return total + cartItem.quantity * cartItem.product.price;
@@ -114,7 +115,11 @@ const Cart: React.FC<CartProps> = ({
           )}
         </TotalContainer>
 
-        <Button disabled={cartItems.length === 0} onPress={handleConfirmOrder}>
+        <Button
+          disabled={cartItems.length === 0}
+          onPress={handleConfirmOrder}
+          isLoading={isLoading}
+        >
           Confirmar pedido
         </Button>
       </Summary>
