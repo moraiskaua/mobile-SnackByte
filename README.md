@@ -18,9 +18,9 @@ Enquanto isso, a equipe na cozinha pode acompanhar os pedidos em tempo real atra
 ### Mobile
 
 <div align="center">
-  <img src="/public/home-mobile.jpg" alt="Mobile" width="300" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" />
-  <img src="/public/order-mobile.jpg" alt="Mobile" width="300" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" />
-  <img src="/public/promo-mobile.jpg" alt="Mobile" width="300" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" />
+  <img src="/public/home-mobile.jpg" alt="Mobile" width="250" />
+  <img src="/public/order-mobile.jpg" alt="Mobile" width="250" />
+  <img src="/public/promo-mobile.jpg" alt="Mobile" width="250" />
 </div>
   
 ### Web
