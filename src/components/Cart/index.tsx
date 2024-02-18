@@ -15,17 +15,24 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { PlusCircle } from '../Icons/PlusCircle';
 import { MinusCircle } from '../Icons/MinusCircle';
 import Button from '../Button';
+import { ProductType } from '../../types/Product';
 
 interface CartProps {
-  cartItem: CartItem[];
+  cartItems: CartItem[];
+  onAdd: (product: ProductType) => void;
+  onRemove: (product: ProductType) => void;
 }
 
-const Cart: React.FC<CartProps> = ({ cartItem }) => {
+const Cart: React.FC<CartProps> = ({ cartItems, onAdd, onRemove }) => {
+  const total = cartItems.reduce((total, cartItem) => {
+    return total + cartItem.quantity * cartItem.product.price;
+  }, 0);
+
   return (
     <>
-      {cartItem.length > 0 && (
+      {cartItems.length > 0 && (
         <FlatList
-          data={cartItem}
+          data={cartItems}
           keyExtractor={cartItem => cartItem.product._id}
           style={{ marginBottom: 20, maxHeight: 150 }}
           showsVerticalScrollIndicator={false}
@@ -55,11 +62,14 @@ const Cart: React.FC<CartProps> = ({ cartItem }) => {
               </ProductContainer>
 
               <Actions>
-                <TouchableOpacity style={{ marginRight: 24 }}>
+                <TouchableOpacity
+                  style={{ marginRight: 24 }}
+                  onPress={() => onRemove(cartItem.product)}
+                >
                   <MinusCircle />
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => onAdd(cartItem.product)}>
                   <PlusCircle />
                 </TouchableOpacity>
               </Actions>
@@ -70,11 +80,11 @@ const Cart: React.FC<CartProps> = ({ cartItem }) => {
 
       <Summary>
         <TotalContainer>
-          {cartItem.length > 0 ? (
+          {cartItems.length > 0 ? (
             <>
               <Text color="#666">Total</Text>
               <Text size={20} weight="600">
-                {formatCurrency(120)}
+                {formatCurrency(total)}
               </Text>
             </>
           ) : (
@@ -82,7 +92,7 @@ const Cart: React.FC<CartProps> = ({ cartItem }) => {
           )}
         </TotalContainer>
 
-        <Button disabled={cartItem.length === 0}>Confirmar pedido</Button>
+        <Button disabled={cartItems.length === 0}>Confirmar pedido</Button>
       </Summary>
     </>
   );

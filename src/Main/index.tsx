@@ -13,15 +13,12 @@ import {
 } from './styles';
 import Cart from '../components/Cart';
 import { CartItem } from '../types/CartItem';
-import { products } from '../mocks/products';
+import { ProductType } from '../types/Product';
 
 const Main = () => {
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
-  const [cartItem, setCartItem] = useState<CartItem[]>([
-    // { product: products[0], quantity: 2 },
-    // { product: products[1], quantity: 1 },
-  ]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const handleSaveTable = (table: string) => {
     setSelectedTable(table);
@@ -29,6 +26,53 @@ const Main = () => {
 
   const handleCancelOrder = () => {
     setSelectedTable('');
+    setCartItems([]);
+  };
+
+  const handleAddToCart = (product: ProductType) => {
+    if (!selectedTable) {
+      setIsTableModalVisible(true);
+    }
+
+    setCartItems(prev => {
+      const itemIndex = prev.findIndex(
+        cartItem => cartItem.product._id === product._id,
+      );
+
+      if (itemIndex < 0) {
+        return prev.concat({ product, quantity: 1 });
+      }
+
+      const newCartItems = [...prev];
+      const item = newCartItems[itemIndex];
+
+      newCartItems[itemIndex] = { ...item, quantity: item.quantity + 1 };
+
+      return newCartItems;
+    });
+  };
+
+  const handleRemoveFromCart = (product: ProductType) => {
+    setCartItems(prev => {
+      const itemIndex = prev.findIndex(
+        cartItem => cartItem.product._id === product._id,
+      );
+      const item = prev[itemIndex];
+      const newCartItems = [...prev];
+
+      if (item.quantity === 1) {
+        newCartItems.splice(itemIndex, 1);
+
+        return newCartItems;
+      }
+
+      newCartItems[itemIndex] = {
+        ...item,
+        quantity: item.quantity - 1,
+      };
+
+      return newCartItems;
+    });
   };
 
   return (
@@ -50,7 +94,7 @@ const Main = () => {
         </CategoriesContainer>
 
         <MenuContainer>
-          <Menu />
+          <Menu onAddToCart={handleAddToCart} />
         </MenuContainer>
       </Container>
 
@@ -61,7 +105,11 @@ const Main = () => {
               Novo Pedido
             </Button>
           ) : (
-            <Cart cartItem={cartItem} />
+            <Cart
+              cartItems={cartItems}
+              onAdd={handleAddToCart}
+              onRemove={handleRemoveFromCart}
+            />
           )}
         </FooterContainer>
       </Footer>

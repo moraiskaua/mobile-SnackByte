@@ -20,14 +20,21 @@ interface ProductModalProps {
   visible: boolean;
   product: ProductType | null;
   onClose: () => void;
+  onAddToCart: (product: ProductType) => void;
 }
 
 const ProductModal: React.FC<ProductModalProps> = ({
   visible,
   product,
   onClose,
+  onAddToCart,
 }) => {
   if (!product) return null;
+
+  const handleAddToCart = () => {
+    onAddToCart(product);
+    onClose();
+  };
 
   return (
     <Modal
@@ -89,7 +96,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
             </Text>
           </PriceContainer>
 
-          <Button>Adicionar</Button>
+          <Button onPress={handleAddToCart}>Adicionar ao pedido</Button>
         </FooterContainer>
       </Footer>
     </Modal>
