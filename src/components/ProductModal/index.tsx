@@ -45,7 +45,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     >
       <Image
         source={{
-          uri: `http://192.168.0.98:8080/uploads/${product.imagePath}`,
+          uri: `${process.env.EXPO_PUBLIC_API_URL}/uploads/${product.imagePath}`,
         }}
       >
         <CloseButton onPress={onClose}>

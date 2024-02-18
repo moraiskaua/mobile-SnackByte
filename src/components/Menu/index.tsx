@@ -48,7 +48,7 @@ const Menu: React.FC<MenuProps> = ({ products, onAddToCart }) => {
           <Product onPress={() => handleOpenProductModal(product)}>
             <ProductImage
               source={{
-                uri: `http://192.168.0.98:8080/uploads/${product.imagePath}`,
+                uri: `${process.env.EXPO_PUBLIC_API_URL}/uploads/${product.imagePath}`,
               }}
             />
 

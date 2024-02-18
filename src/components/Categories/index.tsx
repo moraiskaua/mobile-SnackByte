@@ -1,10 +1,14 @@
-import { categories } from '../../mocks/categories';
 import { Category, Icon } from './styles';
 import { Text } from '../Text';
 import { FlatList } from 'react-native';
 import { useState } from 'react';
+import { CategoryType } from '../../types/Category';
 
-const Categories = () => {
+interface CategoriesProps {
+  categories: CategoryType[];
+}
+
+const Categories: React.FC<CategoriesProps> = ({ categories }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleSelectCategory = (categoryId: string) => {

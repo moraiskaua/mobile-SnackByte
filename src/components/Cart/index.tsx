@@ -1,5 +1,5 @@
 import { FlatList, TouchableOpacity } from 'react-native';
-import { CartItem } from '../../types/CartItem';
+import { CartItemType } from '../../types/CartItem';
 import {
   Actions,
   Image,
@@ -20,7 +20,7 @@ import OrderConfirmModal from '../OrderConfirmModal';
 import { useState } from 'react';
 
 interface CartProps {
-  cartItems: CartItem[];
+  cartItems: CartItemType[];
   onAdd: (product: ProductType) => void;
   onRemove: (product: ProductType) => void;
   onConfirmOrder: () => void;
@@ -64,7 +64,7 @@ const Cart: React.FC<CartProps> = ({
               <ProductContainer>
                 <Image
                   source={{
-                    uri: `http://192.168.0.98:8080/uploads/${cartItem.product.imagePath}`,
+                    uri: `${process.env.EXPO_PUBLIC_API_URL}/uploads/${cartItem.product.imagePath}`,
                   }}
                 />
 
