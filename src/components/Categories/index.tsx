@@ -6,14 +6,19 @@ import { CategoryType } from '../../types/Category';
 
 interface CategoriesProps {
   categories: CategoryType[];
+  onSelectCategory: (categoryId: string) => Promise<void>;
 }
 
-const Categories: React.FC<CategoriesProps> = ({ categories }) => {
+const Categories: React.FC<CategoriesProps> = ({
+  categories,
+  onSelectCategory,
+}) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleSelectCategory = (categoryId: string) => {
     const category = selectedCategory === categoryId ? '' : categoryId;
     setSelectedCategory(category);
+    onSelectCategory(category);
   };
 
   return (
