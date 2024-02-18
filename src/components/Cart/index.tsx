@@ -46,7 +46,7 @@ const Cart: React.FC<CartProps> = ({
     setIsLoading(true);
     await api.post('/orders', {
       table: selectedTable,
-      product: cartItems.map(cartItem => ({
+      products: cartItems.map(cartItem => ({
         product: cartItem.product,
         quantity: cartItem.quantity,
       })),
