@@ -76,7 +76,7 @@ const Cart: React.FC<CartProps> = ({
               <ProductContainer>
                 <Image
                   source={{
-                    uri: `${process.env.EXPO_PUBLIC_API_URL}/uploads/${cartItem.product.imagePath}`,
+                    uri: `https://back-end-snackbyte.vercel.app/uploads/${cartItem.product.imagePath}`,
                   }}
                 />
 

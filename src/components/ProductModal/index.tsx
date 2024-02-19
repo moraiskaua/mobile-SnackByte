@@ -45,7 +45,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
     >
       <Image
         source={{
-          uri: `${process.env.EXPO_PUBLIC_API_URL}/uploads/${product.imagePath}`,
+          uri: `https://back-end-snackbyte.vercel.app/uploads/${product.imagePath}`,
         }}
       >
         <CloseButton onPress={onClose}>
